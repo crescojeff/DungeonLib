@@ -1,0 +1,10 @@
+-e
+-a
+-c
+\catlib\clothing\clothing.d
+\catlib\gemlib\gemlib.d
+\catlib\mover\mover.d
+\catlib\samples\samples.d
+example.d
+\cat\std\zzrqd.d
+\cat\std\zzstd.d

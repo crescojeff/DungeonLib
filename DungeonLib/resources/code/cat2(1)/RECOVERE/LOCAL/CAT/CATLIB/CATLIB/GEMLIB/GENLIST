@@ -1,0 +1,6 @@
+-e
+-a
+example.d
+gemlib.d
+\cat\std\zzstd.d
+\cat\std\zzrqd.d

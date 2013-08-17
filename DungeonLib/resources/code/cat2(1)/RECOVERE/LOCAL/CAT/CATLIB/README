@@ -1,0 +1,61 @@
+*******************************************************************************
+* 		The C Adventure Toolkit Volume 1 (CATLIB 1.0)		      *
+* 		    Compiled by Tony Stiles, August 1991 		      *
+*******************************************************************************
+
+Contents: GEMBIND - Public domain GEM bindings, for use with ST Sozobon C.
+
+          STRINGS - A program to extract strings of text from adventure pgms!
+
+          SAMPLES - Some sample image files, along with a sample editing pgm.
+
+          EXAMPLE - Demonstration of CATLIB functions in use.
+
+	  CATLIB\MOVER    - library function for 'animating' the movement of 
+                          active characters in your adventure.
+
+	  CATLIB\CLOTHING - library function for simulating clothing. i.e. 
+			  trousers cannot be worn over jeans, a pair of pants
+			  cannot be removed while wearing trousers, but could
+		          be removed while wearing a skirt, etc.
+
+	  CATLIB\GEMLIB   - library functions to turn the mouse on/on, and
+                          to use the GEM file selector for saving/loading games.
+
+          CATLIB\SAMPLES  - library functions for playing sample images from
+			  your adventures. Includes a copy of the Mastersound
+			  sample player code, and C code for playing samples -
+			  this could be used in any C program.
+
+*******************************************************************************
+
+*******************************************************************************
+
+Please note: Some programs on this disc may be copyrighted shareware offerings.
+             If they are used regularly then they should be registered with
+	     their respective authors.
+
+	     All the CAT source code, and C source code is in the public 
+	     domain, as are the example generated programs.
+
+*******************************************************************************
+
+If you would like to make a contribution to a future CAT library disc, please
+send me a copy. I'm interested in ANYTHING related to CAT in any way.
+
+	Enjoy, (just to be original!)
+
+		Tony Stiles
+		103a Ludlow Road
+		Itchen
+		SOUTHAMPTON
+		Hants
+		SO2 7ER
+
+*******************************************************************************
+
+
+If you have any questions/queries, you can write to me at the above address,
+but please enclose a stamped addressed envelope if you want a reply!
+
+

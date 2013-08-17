@@ -1,0 +1,6 @@
+Tony Stiles, author of C Adventure Tookit said to me
+ that it is now freeware. I've saved those wendor and support
+files for historical purpose, information in them is outdated.
+Files are here as I got them from Tony Stiles, only addition or change is that freeware.txt file you're now
+reading and re-packaging them as .zip file.
+Regards, Markku Yli-Pentila, uploader of catbit.zip

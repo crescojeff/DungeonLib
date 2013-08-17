@@ -1,0 +1,7 @@
+<STORY>
+<PARAGRAPH>
+<TEXT>
+"abc"
+</TEXT>
+</PARAGRAPH>
+</STORY>

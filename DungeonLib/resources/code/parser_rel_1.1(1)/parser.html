@@ -1,0 +1,2981 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./parser_files/filelist.xml">
+<title>C++ Parser Classes for Interactive Fiction</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Subject>Parser Documentation</o:Subject>
+  <o:Author>Richard Herrick</o:Author>
+  <o:LastAuthor>Xenos</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>1152</o:TotalTime>
+  <o:LastPrinted>2002-09-29T14:58:00Z</o:LastPrinted>
+  <o:Created>2002-09-29T16:17:00Z</o:Created>
+  <o:LastSaved>2002-09-29T16:17:00Z</o:LastSaved>
+  <o:Pages>16</o:Pages>
+  <o:Words>4641</o:Words>
+  <o:Characters>26454</o:Characters>
+  <o:Company>Home</o:Company>
+  <o:Lines>220</o:Lines>
+  <o:Paragraphs>52</o:Paragraphs>
+  <o:CharactersWithSpaces>32487</o:CharactersWithSpaces>
+  <o:Version>9.2720</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:View>Print</w:View>
+  <w:ActiveWritingStyle Lang="EN-US" VendorID="64" DLLVersion="131077"
+   NLCheck="1">1</w:ActiveWritingStyle>
+  <w:DoNotOptimizeForBrowser/>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;
+	mso-font-charset:2;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:0 268435456 0 0 -2147483648 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h1
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	font-size:16.0pt;
+	font-family:Arial;
+	mso-font-kerning:16.0pt;}
+h2
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	font-size:14.0pt;
+	font-family:Arial;
+	font-style:italic;}
+h3
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:3;
+	font-size:13.0pt;
+	font-family:Arial;}
+h4
+	{mso-style-next:Normal;
+	margin:0in;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:4;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+h5
+	{mso-style-next:Normal;
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:5;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+h6
+	{mso-style-next:Normal;
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:6;
+	font-size:14.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Times New Roman";}
+p.MsoHeading7, li.MsoHeading7, div.MsoHeading7
+	{mso-style-next:Normal;
+	margin:0in;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:7;
+	font-size:10.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	font-weight:bold;}
+p.MsoToc1, li.MsoToc1, div.MsoToc1
+	{mso-style-update:auto;
+	mso-style-next:Normal;
+	margin-top:6.0pt;
+	margin-right:0in;
+	margin-bottom:6.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	text-transform:uppercase;
+	font-weight:bold;}
+p.MsoToc2, li.MsoToc2, div.MsoToc2
+	{mso-style-update:auto;
+	mso-style-next:Normal;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:12.0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	font-variant:small-caps;}
+p.MsoToc3, li.MsoToc3, div.MsoToc3
+	{mso-style-update:auto;
+	mso-style-next:Normal;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:24.0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	font-style:italic;}
+p.MsoToc4, li.MsoToc4, div.MsoToc4
+	{mso-style-update:auto;
+	mso-style-next:Normal;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.5pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoToc5, li.MsoToc5, div.MsoToc5
+	{mso-style-update:auto;
+	mso-style-next:Normal;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:48.0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.5pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoToc6, li.MsoToc6, div.MsoToc6
+	{mso-style-update:auto;
+	mso-style-next:Normal;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:60.0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.5pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoToc7, li.MsoToc7, div.MsoToc7
+	{mso-style-update:auto;
+	mso-style-next:Normal;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:1.0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.5pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoToc8, li.MsoToc8, div.MsoToc8
+	{mso-style-update:auto;
+	mso-style-next:Normal;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:84.0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.5pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoToc9, li.MsoToc9, div.MsoToc9
+	{mso-style-update:auto;
+	mso-style-next:Normal;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:96.0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.5pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoHeader, li.MsoHeader, div.MsoHeader
+	{margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:center 3.0in right 6.0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoFooter, li.MsoFooter, div.MsoFooter
+	{margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:center 3.0in right 6.0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-footer:url("./parser_files/header.htm") f1;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+@list l0
+	{mso-list-id:10575973;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-1835120598 67698693 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Wingdings;}
+@list l0:level2
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:"Courier New";
+	mso-bidi-font-family:"Times New Roman";}
+@list l1
+	{mso-list-id:153306853;
+	mso-list-type:hybrid;
+	mso-list-template-ids:1673543224 67698703 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l1:level1
+	{mso-level-tab-stop:.75in;
+	mso-level-number-position:left;
+	margin-left:.75in;
+	text-indent:-.25in;}
+@list l1:level2
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:1.25in;
+	mso-level-number-position:left;
+	margin-left:1.25in;
+	text-indent:-.25in;
+	font-family:"Courier New";
+	mso-bidi-font-family:"Times New Roman";}
+@list l2
+	{mso-list-id:404566955;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-1252096970 67698693 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l2:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Wingdings;}
+@list l3
+	{mso-list-id:443960424;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-11213678 67698693 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l3:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Wingdings;}
+@list l4
+	{mso-list-id:696926555;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-454241924 67698693 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l4:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Wingdings;}
+@list l5
+	{mso-list-id:700520200;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-28944492 67698703 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l5:level1
+	{mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l6
+	{mso-list-id:750395421;
+	mso-list-type:hybrid;
+	mso-list-template-ids:1024761702 67698703 67698713 67698715 67698703 67698713 67698715 67698703 67698713 67698715;}
+@list l6:level1
+	{mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l7
+	{mso-list-id:915627616;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-1212242788 67698703 67698713 67698715 67698703 67698713 67698715 67698703 67698713 67698715;}
+@list l7:level1
+	{mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l8
+	{mso-list-id:939608665;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-28944492 67698693 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l8:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Wingdings;}
+@list l9
+	{mso-list-id:984627842;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-2118508202 67698693 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l9:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Wingdings;}
+@list l9:level2
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:"Courier New";
+	mso-bidi-font-family:"Times New Roman";}
+@list l9:level3
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Wingdings;}
+@list l10
+	{mso-list-id:1036590020;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-479143132 67698693 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l10:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Wingdings;}
+@list l10:level2
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:"Courier New";
+	mso-bidi-font-family:"Times New Roman";}
+@list l11
+	{mso-list-id:1060327554;
+	mso-list-type:hybrid;
+	mso-list-template-ids:1673543224 67698693 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l11:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Wingdings;}
+@list l11:level2
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:"Courier New";
+	mso-bidi-font-family:"Times New Roman";}
+@list l12
+	{mso-list-id:1272931092;
+	mso-list-type:hybrid;
+	mso-list-template-ids:1753639044 67698693 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l12:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Wingdings;}
+@list l13
+	{mso-list-id:1317416612;
+	mso-list-type:hybrid;
+	mso-list-template-ids:321558140 67698693 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l13:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Wingdings;}
+@list l13:level2
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:"Courier New";
+	mso-bidi-font-family:"Times New Roman";}
+@list l13:level3
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Wingdings;}
+@list l14
+	{mso-list-id:1413430046;
+	mso-list-type:hybrid;
+	mso-list-template-ids:921305626 67698693 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l14:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Wingdings;}
+@list l15
+	{mso-list-id:1445926844;
+	mso-list-type:hybrid;
+	mso-list-template-ids:1730285270 67698693 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l15:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Wingdings;}
+@list l16
+	{mso-list-id:2021543735;
+	mso-list-type:hybrid;
+	mso-list-template-ids:1673543224 67698689 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l16:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Symbol;}
+@list l17
+	{mso-list-id:2098937731;
+	mso-list-type:hybrid;
+	mso-list-template-ids:1965854964 67698693 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l17:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Wingdings;}
+@list l17:level2
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:"Courier New";
+	mso-bidi-font-family:"Times New Roman";}
+@list l18
+	{mso-list-id:2099017991;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-1229292552 67698693 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l18:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Wingdings;}
+@list l18:level2
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:"Courier New";
+	mso-bidi-font-family:"Times New Roman";}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="2050"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body lang=EN-US link=blue vlink=purple style='tab-interval:.5in'>
+
+<div class=Section1>
+
+<p class=MsoNormal align=center style='text-align:center'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<h6><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></h6>
+
+<h6><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></h6>
+
+<h6><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></h6>
+
+<h6>C++ Parser Classes for Interactive Fiction</h6>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>Version
+1.1<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>Copyright
+© 2002 Rich Herrick (<a href="mailto:xenos@stny.rr.com">xenos@stny.rr.com</a>)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>This
+software is freeware.<span style="mso-spacerun: yes">  </span>Permission to
+copy, use, modify, sell and distribute this software is granted provided this
+copyright notice appears in all copies. This software is provided &quot;as
+is&quot; without express or implied warranty, and with no claim as to its
+suitability for any purpose.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>Enjoy.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>Revision
+History:<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid windowtext .5pt;mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+ <tr>
+  <td width=103 valign=top style='width:77.4pt;border:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoHeading7>Date</p>
+  </td>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoHeading7>Version</p>
+  </td>
+  <td width=391 valign=top style='width:293.4pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoHeading7>Description</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=103 valign=top style='width:77.4pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>03/24/2000<o:p></o:p></span></p>
+  </td>
+  <td width=96 valign=top style='width:1.0in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>1.0<o:p></o:p></span></p>
+  </td>
+  <td width=391 valign=top style='width:293.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>Initial
+  Release<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=103 valign=top style='width:77.4pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>09/25/2002<o:p></o:p></span></p>
+  </td>
+  <td width=96 valign=top style='width:1.0in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>1.1<o:p></o:p></span></p>
+  </td>
+  <td width=391 valign=top style='width:293.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>Added
+  regular expression; removed debug log; minor bug fixes<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=103 valign=top style='width:77.4pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></p>
+  </td>
+  <td width=96 valign=top style='width:1.0in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></p>
+  </td>
+  <td width=391 valign=top style='width:293.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<span style='font-size:12.0pt;font-family:"Times New Roman";mso-fareast-font-family:
+"Times New Roman";mso-ansi-language:EN-US;mso-fareast-language:EN-US;
+mso-bidi-language:AR-SA'><br clear=all style='page-break-before:always'>
+</span>
+
+<p class=MsoNormal align=center style='text-align:center'><b><span
+style='font-size:14.0pt;mso-bidi-font-size:12.0pt'>Table of Contents<o:p></o:p></span></b></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b><span
+style='font-size:14.0pt;mso-bidi-font-size:12.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></b></p>
+
+<p class=MsoToc1 style='tab-stops:right dotted 431.5pt'><!--[if supportFields]><span
+style='mso-element:field-begin'></span><span style="mso-spacerun:
+yes"> </span>TOC \o &quot;1-3&quot; \h \z <span style='mso-element:field-separator'></span><![endif]--><span
+class=MsoHyperlink><a href="#_Toc21065024">Over View<span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-tab-count:1 dotted'>... </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc21065024 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'>3</span><span style='color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000D0000005F0054006F006300320031003000360035003000320034000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><span
+style='text-transform:none;font-weight:normal'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:right dotted 431.5pt'><span
+class=MsoHyperlink><a href="#_Toc21065025">Theory<span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-tab-count:1 dotted'>.. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc21065025 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'>3</span><span style='color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000D0000005F0054006F006300320031003000360035003000320035000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><span
+style='text-transform:none;font-weight:normal'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:right dotted 431.5pt'><span
+class=MsoHyperlink><a href="#_Toc21065026">Compiling<span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-tab-count:1 dotted'>.. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc21065026 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'>3</span><span style='color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000D0000005F0054006F006300320031003000360035003000320036000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><span
+style='text-transform:none;font-weight:normal'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:right dotted 431.5pt'><span
+class=MsoHyperlink><a href="#_Toc21065027">Programmer’s notes<span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc21065027 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'>4</span><span style='color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000D0000005F0054006F006300320031003000360035003000320037000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><span
+style='text-transform:none;font-weight:normal'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:right dotted 431.5pt'><span
+class=MsoHyperlink><a href="#_Toc21065028">Modifiables<span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc21065028 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'>4</span><span style='color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000D0000005F0054006F006300320031003000360035003000320038000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><span
+style='text-transform:none;font-weight:normal'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:right dotted 431.5pt'><span
+class=MsoHyperlink><a href="#_Toc21065029">Parse strings<span style='color:
+windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc21065029 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'>4</span><span style='color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000D0000005F0054006F006300320031003000360035003000320039000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><span
+style='font-variant:normal'><o:p></o:p></span></p>
+
+<p class=MsoToc3 style='tab-stops:right dotted 431.5pt'><span
+class=MsoHyperlink><a href="#_Toc21065030">Parts-of-Speech Codes<span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc21065030 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'>4</span><span style='color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000D0000005F0054006F006300320031003000360035003000330030000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><span
+style='font-style:normal'><o:p></o:p></span></p>
+
+<p class=MsoToc3 style='tab-stops:right dotted 431.5pt'><span
+class=MsoHyperlink><a href="#_Toc21065031">Operational Codes<span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc21065031 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'>5</span><span style='color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000D0000005F0054006F006300320031003000360035003000330031000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><span
+style='font-style:normal'><o:p></o:p></span></p>
+
+<p class=MsoToc3 style='tab-stops:right dotted 431.5pt'><span
+class=MsoHyperlink><a href="#_Toc21065032">Command Codes<span style='color:
+windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc21065032 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'>5</span><span style='color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000D0000005F0054006F006300320031003000360035003000330032000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><span
+style='font-style:normal'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:right dotted 431.5pt'><span
+class=MsoHyperlink><a href="#_Toc21065033">Regular Expressions<span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc21065033 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'>6</span><span style='color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000D0000005F0054006F006300320031003000360035003000330033000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><span
+style='font-variant:normal'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:right dotted 431.5pt'><span
+class=MsoHyperlink><a href="#_Toc21065034">Word Lookup<span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc21065034 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'>7</span><span style='color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000D0000005F0054006F006300320031003000360035003000330034000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><span
+style='font-variant:normal'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:right dotted 431.5pt'><span
+class=MsoHyperlink><a href="#_Toc21065035">Known Words<span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc21065035 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'>8</span><span style='color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000D0000005F0054006F006300320031003000360035003000330035000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><span
+style='font-variant:normal'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:right dotted 431.5pt'><span
+class=MsoHyperlink><a href="#_Toc21065036">Punctuation<span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc21065036 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'>8</span><span style='color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000D0000005F0054006F006300320031003000360035003000330036000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><span
+style='font-variant:normal'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:right dotted 431.5pt'><span
+class=MsoHyperlink><a href="#_Toc21065037">Word Classes<span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc21065037 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'>8</span><span style='color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000D0000005F0054006F006300320031003000360035003000330037000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><span
+style='font-variant:normal'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:right dotted 431.5pt'><span
+class=MsoHyperlink><a href="#_Toc21065038">Ambiguities<span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc21065038 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'>8</span><span style='color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000D0000005F0054006F006300320031003000360035003000330038000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><span
+style='text-transform:none;font-weight:normal'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:right dotted 431.5pt'><span
+class=MsoHyperlink><a href="#_Toc21065039">Exceptions<span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc21065039 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'>9</span><span style='color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000D0000005F0054006F006300320031003000360035003000330039000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><span
+style='text-transform:none;font-weight:normal'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:right dotted 431.5pt'><span
+class=MsoHyperlink><a href="#_Toc21065040">Classes<span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc21065040 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'>9</span><span style='color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000D0000005F0054006F006300320031003000360035003000340030000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><span
+style='text-transform:none;font-weight:normal'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:right dotted 431.5pt'><span
+class=MsoHyperlink><a href="#_Toc21065041">Dictionary (diction.hpp)<span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-tab-count:1 dotted'> </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc21065041 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'>9</span><span style='color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000D0000005F0054006F006300320031003000360035003000340031000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><span
+style='font-variant:normal'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:right dotted 431.5pt'><span
+class=MsoHyperlink><a href="#_Toc21065042">Nfa (nfa.hpp)<span style='color:
+windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1 dotted'> </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc21065042 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'>11</span><span style='color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000D0000005F0054006F006300320031003000360035003000340032000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><span
+style='font-variant:normal'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:right dotted 431.5pt'><span
+class=MsoHyperlink><a href="#_Toc21065043">Dfa (dfa.hpp)<span style='color:
+windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1 dotted'> </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc21065043 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'>12</span><span style='color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000D0000005F0054006F006300320031003000360035003000340033000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><span
+style='font-variant:normal'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:right dotted 431.5pt'><span
+class=MsoHyperlink><a href="#_Toc21065044">LexicalAnalyzer (lexical.hpp)<span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-tab-count:1 dotted'> </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc21065044 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'>13</span><span style='color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000D0000005F0054006F006300320031003000360035003000340034000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><span
+style='font-variant:normal'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:right dotted 431.5pt'><span
+class=MsoHyperlink><a href="#_Toc21065045">Sentences (sentence.cpp)<span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-tab-count:1 dotted'> </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc21065045 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'>14</span><span style='color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000D0000005F0054006F006300320031003000360035003000340035000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><span
+style='font-variant:normal'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:right dotted 431.5pt'><span
+class=MsoHyperlink><a href="#_Toc21065046">Parser (parser.cpp)<span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-tab-count:1 dotted'> </span></span><!--[if supportFields]><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-element:field-begin'></span></span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'> PAGEREF _Toc21065046 \h </span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'>15</span><span style='color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000D0000005F0054006F006300320031003000360035003000340036000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span><span
+style='font-variant:normal'><o:p></o:p></span></p>
+
+<h1><!--[if supportFields]><span style='mso-element:field-end'></span><![endif]--><br
+clear=all style='page-break-before:always'>
+<a name="_Toc21065024">Over View</a></h1>
+
+<p class=MsoNormal>This project is an attempt to implement an English sentence
+parser that was adaptable, without regard for complexity.<span
+style="mso-spacerun: yes">  </span>The parser’s parse behavior is modified
+using “parse strings” that are similar to regular expressions, but using words
+instead of characters.</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<h1><a name="_Toc21065025">Theory</a></h1>
+
+<p class=MsoNormal>This section explains, in general, how the parse works.<span
+style="mso-spacerun: yes">  </span>Some of the points touch upon will be
+explain in more detail in later sections.</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal>When the constructor for the parse is called, one of the
+parameters given to it is a set of parse strings.<span style="mso-spacerun:
+yes">  </span>These strings tell the parse what constitute a valid set of sentences
+and how to build these sentences using the Sentences class.</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal>Given a set of parse strings, the parse constructs an
+equivalent Non-deterministic Finite Automaton (NFA).<span style="mso-spacerun:
+yes">  </span>In simplest terms, an NFA is a directed graph made up of a finite
+set of nodes and edges.<span style="mso-spacerun: yes">  </span>The nodes
+represent valid states for any traversal of the graph.<span
+style="mso-spacerun: yes">  </span>For each node, its set of edges indicates
+what paths to other (or even the same) nodes exist, and what conditions much
+exist to follow a particular path.<span style="mso-spacerun: yes"> 
+</span>Following an edge from one node to another is called a transition.<span
+style="mso-spacerun: yes">  </span>For the parser, the traversal condition is
+the matching of an inputted word to a word class, or part-of-speech (POS).<span
+style="mso-spacerun: yes">  </span>Once a transition is made for a given word,
+the word is considered valid and the parse moves on to the next word.<span
+style="mso-spacerun: yes">  </span>For each word to be valid, there must be a
+valid path from the current node to another.<span style="mso-spacerun: yes"> 
+</span>The parse ends when either there is no valid path for the given word
+(parse fails) or there are no more words to parse and the current node is a “final”
+node (parse succeeds).<span style="mso-spacerun: yes">  </span>For NFAs, there
+is also a “free” transition that can always be followed, but the current word
+of input is not advanced to the next.<span style="mso-spacerun: yes"> 
+</span>This transition is called a Llamda (also called a null or epsilon)
+transition.</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal>The NFA is non-deterministic because, for a given node,
+there can be more than one valid path.<span style="mso-spacerun: yes"> 
+</span>Before being used, to reduce ambiguity, speed up processing, and
+decrease the size of the NFA, the NFA is converted to a Deterministic Finite
+Automaton (DFA).<span style="mso-spacerun: yes">  </span>With a DFA, there is
+always only one valid path and there are no Llamda transitions.<span
+style="mso-spacerun: yes">  </span>Technically, though, what is build is still
+an NFA because some of the features and options allowed by the parse strings
+cause non-determinism.<span style="mso-spacerun: yes">  </span>Ambiguities such
+as these are alleviated by precedence rules, which will be addressed in a later
+section.</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<h1><a name="_Toc21065026">Compiling</a></h1>
+
+<p class=MsoNormal>The code is written in C++, making heavy use of templates
+and the Standard Template Library (STL).<span style="mso-spacerun: yes"> 
+</span>You will need a fairly new C++ compiler.<span style="mso-spacerun:
+yes">  </span>I have successful compiled the code and the simple test program
+using Visual C++ 6.0 (VC6) with service pack 5 and additional fixes at: <a
+href="http://www.dinkumware.com/vc_fixes.html">http://www.dinkumware.com/vc_fixes.html</a>;
+DJGPP (GNU) version 3.1.</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal>Included with the source, are makefiles for VC6 and GNU C. </p>
+
+<h1><a name="_Toc21065027">Programmer’s notes</a></h1>
+
+<ul style='margin-top:0in' type=square>
+ <li class=MsoNormal style='mso-list:l11 level1 lfo2;tab-stops:list .5in'>Since
+     I developed the code using a PC running Windows, I’ve been very liberal
+     with file names.<span style="mso-spacerun: yes">  </span>On a system like
+     Unix, you’ll have to ensure that the case matches in all instances (file’s
+     name, #include, makefile, etc.).<span style="mso-spacerun: yes"> 
+     </span>On an MS-DOS system, you’ll have to shorten some of the names.</li>
+ <li class=MsoNormal style='mso-list:l11 level1 lfo2;tab-stops:list .5in'>I’ve
+     noticed that when compiling a debug build using VC6, execution times will
+     increase dramatically when using STL.<span style="mso-spacerun: yes"> 
+     </span>For very complex parse strings, initialization can take several
+     seconds.</li>
+</ul>
+
+<p class=MsoNormal style='margin-right:-.5in'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<h1><a name="_Toc21065028"></a><a name="_Modifiables"></a><span
+style='mso-bookmark:_Toc21065028'>Modifiables</span></h1>
+
+<p class=MsoNormal>Modifiables are non-programming (data-only) features that
+can be manipulated to change the behavior of the parser, or other associated
+classes.</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<h2><a name="_Toc21065029">Parse strings</a></h2>
+
+<p class=MsoNormal>This set of strings is declared in “parsestr.h” and defined
+in “parsestr.cpp”.<span style="mso-spacerun: yes">  </span>They define what
+groupings of words the parse shall except as valid.<span style="mso-spacerun:
+yes">  </span>They also dictate how a Sentences class object is to be built
+from a given input.<span style="mso-spacerun: yes">  </span>Each parse string
+consists of codes, some defining parts-of-speech (POS) and others defining such
+things as relation and repetition.<span style="mso-spacerun: yes"> 
+</span>White space is ignored, but may be used for clarity.<span
+style="mso-spacerun: yes">  </span>All codes are case sensitive.</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<h3><a name="_Toc21065030">Parts-of-Speech Codes</a></h3>
+
+<p class=MsoNormal>The parse accepts the following POS or word classes:</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid windowtext .5pt;mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <h4>Code</h4>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <h4>POS or Classes of Words Accepted as a Match</h4>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>a<o:p></o:p></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Any word in dictionary</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>A<o:p></o:p></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Any word, including gibberish (a word not in the
+  dictionary)</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>g<o:p></o:p></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Gibberish</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>r<o:p></o:p></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Article</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>d<o:p></o:p></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Adverb</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>j<o:p></o:p></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Adjective</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>c<o:p></o:p></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Conjunction</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>p<o:p></o:p></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Preposition</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>v<o:p></o:p></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Verb</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>n<o:p></o:p></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Noun (any)</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>o<o:p></o:p></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Pronoun</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>P<o:p></o:p></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Proper Noun</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>m<o:p></o:p></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Match exact word (not used directly, see &lt;word,
+  class&gt; below)</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>x<o:p></o:p></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Regular Expression (not used directly, see /regex/number/
+  below).<span style="mso-spacerun: yes">  </span>Used to match numbers, codes,
+  etc.</p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal>Note that punctuation characters are their own POS
+codes.<span style="mso-spacerun: yes">  </span>Punctuation is usually ignored
+by the parser, except when explicitly used in the parse string.<span
+style="mso-spacerun: yes">  </span>See the example for operational code p,
+below.</p>
+
+<h3><a name="_Toc21065031">Operational Codes</a></h3>
+
+<p class=MsoNormal>These codes are used to define when and how the POS codes
+are acceptable.<span style="mso-spacerun: yes">  </span>In defining how these
+codes are used, the letters X, Y and Z are used to represent any one of the
+above POS codes.<span style="mso-spacerun: yes">  </span>Note that some codes
+also act upon other codes, not just POS.</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid windowtext .5pt;mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <h4>Code</h4>
+  </td>
+  <td width=313 valign=top style='width:234.75pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <h4>Description</h4>
+  </td>
+  <td width=162 valign=top style='width:121.65pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <h4>Example(s)</h4>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>p<o:p></o:p></p>
+  </td>
+  <td width=313 valign=top style='width:234.75pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>The POS must be present</p>
+  </td>
+  <td width=162 valign=top style='width:121.65pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>pX p!<o:p></o:p></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>o<o:p></o:p></p>
+  </td>
+  <td width=313 valign=top style='width:234.75pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>The POS is optional</p>
+  </td>
+  <td width=162 valign=top style='width:121.65pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>OX<o:p></o:p></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>*<o:p></o:p></p>
+  </td>
+  <td width=313 valign=top style='width:234.75pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>The POS is matched zero or more times</p>
+  </td>
+  <td width=162 valign=top style='width:121.65pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>*X<o:p></o:p></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>+<o:p></o:p></p>
+  </td>
+  <td width=313 valign=top style='width:234.75pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>The POS is matched one or more times</p>
+  </td>
+  <td width=162 valign=top style='width:121.65pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>+X<o:p></o:p></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>|<o:p></o:p></p>
+  </td>
+  <td width=313 valign=top style='width:234.75pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Any one of the choices may be matched</p>
+  </td>
+  <td width=162 valign=top style='width:121.65pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>+X | *Y | pZ<o:p></o:p></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>()<o:p></o:p></p>
+  </td>
+  <td width=313 valign=top style='width:234.75pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Groups multiple codes together</p>
+  </td>
+  <td width=162 valign=top style='width:121.65pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>(pXoY)<span style="mso-spacerun: yes">  </span>*(pX | pY)<o:p></o:p></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>{}<o:p></o:p></p>
+  </td>
+  <td width=313 valign=top style='width:234.75pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Short-cut for *()</p>
+  </td>
+  <td width=162 valign=top style='width:121.65pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>{pX | oY}<o:p></o:p></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>[]<o:p></o:p></p>
+  </td>
+  <td width=313 valign=top style='width:234.75pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Short-cut for +()</p>
+  </td>
+  <td width=162 valign=top style='width:121.65pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>[pX | oY]<o:p></o:p></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>&lt;<i>word, class</i>&gt;<o:p></o:p></p>
+  </td>
+  <td width=313 valign=top style='width:234.75pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Matches a particular word*</p>
+  </td>
+  <td width=162 valign=top style='width:121.65pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>&lt;tell, verb&gt;<o:p></o:p></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>/exp/number/<o:p></o:p></p>
+  </td>
+  <td width=313 valign=top style='width:234.75pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Matches a regular expression**</p>
+  </td>
+  <td width=162 valign=top style='width:121.65pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>/[0-9]+/5/<o:p></o:p></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal>*The word should be in lower case and be defined in the
+dictionary used by the parser.<span style="mso-spacerun: yes">  </span>The
+class name is optional.<span style="mso-spacerun: yes">  </span>If it is
+present, it should be in lower case, and match one of the class names in
+WordClassNames found in “vocab.h”.<span style="mso-spacerun: yes">  </span>If
+the class name is not present, the parser will choose one appropriate for the
+word, giving preference to the one with the highest precedence.<span
+style="mso-spacerun: yes">  </span>From this code, the parser generates a POS
+code of type ‘m’.</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal>**Use two slashes to represent a slash within the
+expression.<span style="mso-spacerun: yes">  </span>“number” is an integer
+value used to identify the expression that was matched.<span
+style="mso-spacerun: yes">  </span>“number” (including the following slash) is
+optional, and defaults to zero (0).<span style="mso-spacerun: yes"> 
+</span>From this code, the parser generates a POS code of type ‘x’.<span
+style="mso-spacerun: yes">  </span>See <a href="#_Regular_Expressions">Regular
+Expressions</a>.</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<h3><a name="_Toc21065032">Command Codes</a></h3>
+
+<p class=MsoNormal>Command codes are optional and follow the POS code.<span
+style="mso-spacerun: yes">  </span>The two codes are separated by a colon.<span
+style="mso-spacerun: yes">  </span>Command codes are used to give special
+instructions to the parser.<span style="mso-spacerun: yes">  </span>Following
+the command code is a function number.<span style="mso-spacerun: yes"> 
+</span>This number instructs the Sentences class how the word is to be
+added.<span style="mso-spacerun: yes">  </span>Function numbers are optional,
+except with the ‘C’ command where they are mandatory.<span style="mso-spacerun:
+yes">  </span>Function numbers may be present without a command code, but the
+colon must still be present.<span style="mso-spacerun: yes">  </span>The
+behavior of the Sentence class object using the function number can be changed
+by modifying the AddWord method in “Sentence.cpp”.<span style="mso-spacerun:
+yes">  </span>Note that function numbers will be “executed” in <i>reverse </i>order
+of parsed words.<span style="mso-spacerun: yes">  </span>This is because the
+parse works recursively backwards, making sure that all words that come after a
+given word are valid before accepting the current word as valid.<span
+style="mso-spacerun: yes">  </span>For example, with the parse string “pv:1
+pn:2”, an acceptable input (a verb and a noun) will cause 2 to be executed and
+then 1.<span style="mso-spacerun: yes">  </span>Also note that this means that
+the actual words are add to the sentence object in reverse order of entry.</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal>A POS code without a function number defaults to having a
+function number of zero (0).</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid windowtext .5pt;mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <h4>Code</h4>
+  </td>
+  <td width=312 valign=top style='width:3.25in;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <h4>Description</h4>
+  </td>
+  <td width=163 valign=top style='width:1.7in;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b>Example(s)<o:p></o:p></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>A<o:p></o:p></p>
+  </td>
+  <td width=312 valign=top style='width:3.25in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Add word to parsed words*</p>
+  </td>
+  <td width=163 valign=top style='width:1.7in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>&lt;green&gt;:A1 &lt;tree&gt;:A<o:p></o:p></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>C<o:p></o:p></p>
+  </td>
+  <td width=312 valign=top style='width:3.25in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Execute Command only**</p>
+  </td>
+  <td width=163 valign=top style='width:1.7in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>pv:C5 pn:c67<o:p></o:p></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>N<o:p></o:p></p>
+  </td>
+  <td width=312 valign=top style='width:3.25in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>No command, same as omitting command</p>
+  </td>
+  <td width=163 valign=top style='width:1.7in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>op:N3 pd:4<o:p></o:p></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal>*This command code can only be used with m (&lt;<i>word,
+class&gt;</i>) codes.<span style="mso-spacerun: yes">  </span>It does not match
+the word from input, but inserts it into the sentence at the current point of
+the parse. For example, the parse string “pv &lt;to, preposition&gt;:A
+&lt;the&gt; pn” would match a verb, insert the word “to” as a preposition,
+match the word “the”, and lastly match any one noun.<span style="mso-spacerun:
+yes">  </span>Of course, “&lt;to, preposition&gt;” could be shorted to
+“&lt;to&gt;” if the word “to” is not part of any word class with a higher
+precedence than a preposition.</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal>**With this command, both the operational code and the POS
+code are ignored, except for determining precedence.</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal>Note that some interesting things can be done without the
+need to add more command codes.<span style="mso-spacerun: yes">  </span>For
+example, to force the parser to match a word but discard it, use a function
+number that does nothing.<span style="mso-spacerun: yes">  </span>Assuming
+function number 99 does nothing, the parse string “&lt;tell&gt;:99 pP
+&lt;to&gt;:99 pv pn” would match the input “tell bob to go home” as “bob go
+home”.<span style="mso-spacerun: yes">  </span>Using this technique can greatly
+simplify processing of the sentence by having the parser remove redundant or
+frivolous words and phrases.</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal>The set of parse strings are treated as if they were one
+string of the form “(string 1) | (string 2) | … (string n)”, except that when
+ambiguities arise, precedence is given the string with the lower number.</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<h2><a name="_Toc21065033"></a><a name="_Regular_Expressions"></a><span
+style='mso-bookmark:_Toc21065033'>Regular Expressions</span></h2>
+
+<p class=MsoNormal>Regular expressions are of the form:<i> /regex/number/</i>,
+where <i>regex</i> is the regular expression and <i>number</i> is an integer
+value used to identify the matching expression.<span style="mso-spacerun:
+yes">  </span>A slash may be used with the expression by representing it as two
+slashes (“//”).<span style="mso-spacerun: yes">  </span>The number and its
+trailing slashing are optional and the number defaults to zero (0).<span
+style="mso-spacerun: yes">  </span>Regular Expressions may contain the
+following:</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid windowtext .5pt;mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+ <tr>
+  <td width=139 valign=top style='width:1.45in;border:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <h4>Expression</h4>
+  </td>
+  <td width=451 valign=top style='width:4.7in;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <h4>Description</h4>
+  </td>
+ </tr>
+ <tr>
+  <td width=139 valign=top style='width:1.45in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>$ (dollar sign)<o:p></o:p></p>
+  </td>
+  <td width=451 valign=top style='width:4.7in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Match end of string.</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=139 valign=top style='width:1.45in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>. (period)<o:p></o:p></p>
+  </td>
+  <td width=451 valign=top style='width:4.7in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Match any single character.</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=139 valign=top style='width:1.45in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>* (asterisk)<o:p></o:p></p>
+  </td>
+  <td width=451 valign=top style='width:4.7in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Match zero or more repetitions of the preceding
+  expression.</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=139 valign=top style='width:1.45in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>+ (plus sign)<o:p></o:p></p>
+  </td>
+  <td width=451 valign=top style='width:4.7in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Match one or more repetitions of the preceding expression.</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=139 valign=top style='width:1.45in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>? (question mark)<o:p></o:p></p>
+  </td>
+  <td width=451 valign=top style='width:4.7in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Match zero or one occurrences of the preceding expression.</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=139 valign=top style='width:1.45in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>\c<o:p></o:p></p>
+  </td>
+  <td width=451 valign=top style='width:4.7in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Match the literal character ‘c’ (escape sequence).</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=139 valign=top style='width:1.45in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>\xdd<o:p></o:p></p>
+  </td>
+  <td width=451 valign=top style='width:4.7in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Match the character with the value of 0xdd.</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=139 valign=top style='width:1.45in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>{count}<o:p></o:p></p>
+  </td>
+  <td width=451 valign=top style='width:4.7in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Match the specified number of the preceding expression.</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=139 valign=top style='width:1.45in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>{min,}<o:p></o:p></p>
+  </td>
+  <td width=451 valign=top style='width:4.7in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Match at least the specified number of the preceding
+  expression.</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=139 valign=top style='width:1.45in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>{min,max}<o:p></o:p></p>
+  </td>
+  <td width=451 valign=top style='width:4.7in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Match between min and max of the preceding expression.</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=139 valign=top style='width:1.45in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>r1|r2<o:p></o:p></p>
+  </td>
+  <td width=451 valign=top style='width:4.7in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Match either expression r1 or r2.<span
+  style="mso-spacerun: yes">  </span>‘|’ has the lowest precedence of all
+  expressions, except for ‘/’.</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=139 valign=top style='width:1.45in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>r1/r2<o:p></o:p></p>
+  </td>
+  <td width=451 valign=top style='width:4.7in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Match r1 only if it is followed by r2.<span
+  style="mso-spacerun: yes">  </span>r2 is not consumed.<span
+  style="mso-spacerun: yes">  </span>'/' has the lowest precedence, and binds
+  right to left. For example: given r1/r2/r3, r1 will only match if r2 follows
+  r1, and r2 will only match if r3 follows r2.<span style="mso-spacerun: yes"> 
+  </span>Neither r2 nor r3 are consumed.</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=139 valign=top style='width:1.45in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>() (parentheses)<o:p></o:p></p>
+  </td>
+  <td width=451 valign=top style='width:4.7in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Used to group expressions together.</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=139 valign=top style='width:1.45in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>[] (brackets)<o:p></o:p></p>
+  </td>
+  <td width=451 valign=top style='width:4.7in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Match any character in brackets (or any not in brackets,
+  if the first character is '^').<span style="mso-spacerun: yes"> 
+  </span>Ranges can be specified, such as: 0-9, a-z, or A-Za-z.<span
+  style="mso-spacerun: yes">  </span>A closing bracket (']') may be in the set
+  if it is the first character after the opening bracket ('[') or the '^'
+  character.<span style="mso-spacerun: yes">  </span>A minus sign ('-') may be
+  in the set of it is the first character after the opening bracket ('[') or
+  the '^' character or the last character before the closing bracket.<span
+  style="mso-spacerun: yes">  </span>A carat ('^') may be in the set if it is
+  not the first character.</p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal>Bracketed expressions may also contain the following
+character classes:</p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid windowtext .5pt;mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+ <tr>
+  <td width=139 valign=top style='width:1.45in;border:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <h4>Class</h4>
+  </td>
+  <td width=451 valign=top style='width:4.7in;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <h4>Description</h4>
+  </td>
+ </tr>
+ <tr>
+  <td width=139 valign=top style='width:1.45in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>[:alpha:] <o:p></o:p></p>
+  </td>
+  <td width=451 valign=top style='width:4.7in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Match any letter, as determined by isalpha()</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=139 valign=top style='width:1.45in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>[:lower:] <o:p></o:p></p>
+  </td>
+  <td width=451 valign=top style='width:4.7in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Match any lowercase letter, as determined by islower()</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=139 valign=top style='width:1.45in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>[:upper:] <o:p></o:p></p>
+  </td>
+  <td width=451 valign=top style='width:4.7in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Match any uppercase letter, as determined by isupper()</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=139 valign=top style='width:1.45in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>[:alnum:] <o:p></o:p></p>
+  </td>
+  <td width=451 valign=top style='width:4.7in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Match any letter or digit, as determined by isalnum()</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=139 valign=top style='width:1.45in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>[:digit:] <o:p></o:p></p>
+  </td>
+  <td width=451 valign=top style='width:4.7in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Match any digit, as determined by isdigit()</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=139 valign=top style='width:1.45in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>[:xdigit:]<o:p></o:p></p>
+  </td>
+  <td width=451 valign=top style='width:4.7in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Match any hexidecimal digit, as determined by isxdigit()</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=139 valign=top style='width:1.45in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>[:space:] <o:p></o:p></p>
+  </td>
+  <td width=451 valign=top style='width:4.7in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Match any whitespace (except \n or \r)</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=139 valign=top style='width:1.45in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>[:cntrl:] <o:p></o:p></p>
+  </td>
+  <td width=451 valign=top style='width:4.7in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Match any control character, as determined by iscntrl()</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=139 valign=top style='width:1.45in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>[:print:] <o:p></o:p></p>
+  </td>
+  <td width=451 valign=top style='width:4.7in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Match any printable character, as determined by isprint()</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=139 valign=top style='width:1.45in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>[:graph:] <o:p></o:p></p>
+  </td>
+  <td width=451 valign=top style='width:4.7in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Match any printable character, as determined by isgraph()</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=139 valign=top style='width:1.45in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>[:punct:]<o:p></o:p></p>
+  </td>
+  <td width=451 valign=top style='width:4.7in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Match any punctuation, as determined by ispunct(). Note
+  that this can accept different characters those defined in PUNCT_CHARS.</p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoHeader style='tab-stops:.5in'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<h2><a name="_Toc21065034"></a><a name="_Word_Lookup"></a><span
+style='mso-bookmark:_Toc21065034'>Word Lookup</span></h2>
+
+<p class=MsoNormal>When a Dictionary class is instantiated, two parameters are
+given to the dictionary to tell it how to search its list of known words for a
+match.<span style="mso-spacerun: yes">  </span>The first is a number, indicated
+the number of significant letters (SL) in a word.<span style="mso-spacerun:
+yes">  </span>The second is a code that tells the dictionary the type of
+comparison to perform.<span style="mso-spacerun: yes">  </span>These codes are
+defined as follows:</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid windowtext .5pt;mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <h4>Code</h4>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b>Description<o:p></o:p></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>SiNone<o:p></o:p></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Only the SL letters are significant</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>siAllLetters<o:p></o:p></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>All letters are significant (SL is ignored)</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>siNoAmbiguity<o:p></o:p></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>The dictionary will accept as few letters (&gt;= SL) that
+  avoid ambiguity</p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal>Examples:</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<ol style='margin-top:0in' start=1 type=1>
+ <li class=MsoNormal style='mso-list:l7 level1 lfo5;tab-stops:list .5in'>If SL
+     = 3 and code = siNone, then inputting “nor” will match “north” in the
+     dictionary.<span style="mso-spacerun: yes">  </span>If “northeast” is also
+     in the dictionary, it is unknown which one the dictionary will pick.</li>
+ <li class=MsoNormal style='mso-list:l7 level1 lfo5;tab-stops:list .5in'>If
+     code = siAllLetters, the dictionary will only match inputted words that
+     exactly match words in the dictionary.</li>
+ <li class=MsoNormal style='mso-list:l7 level1 lfo5;tab-stops:list .5in'>If SL
+     = 3 and code = siNoAmbiguity, then inputting “nor” will match “north” only
+     if no other word in the dictionary starts with “nor”.<span
+     style="mso-spacerun: yes">  </span>Inputting “north” is <i>not</i> an
+     ambiguity when “north” is in the dictionary, even if “northeast” is also
+     in the dictionary.<span style="mso-spacerun: yes">  </span>Exact matches
+     are never ambiguous.</li>
+</ol>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal>Note that siAllLetters has a search time of O(log n), while
+both siNone and siNoAmbiguity have a search time of O(n).</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<h2><a name="_Toc21065035">Known Words</a></h2>
+
+<p class=MsoNormal>The words known to the dictionary, including their types and
+other information, are contained in an array given to the constructor.<span
+style="mso-spacerun: yes">  </span>The element type is WordRec, which is
+defined in “vocab.h”.<span style="mso-spacerun: yes">  </span>In the current
+set of source code, the known words are defined in the Vocabulary array
+contained in the file “vocab.cpp”.</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<h2><a name="_Toc21065036"></a><a name="_Punctuation"></a><span
+style='mso-bookmark:_Toc21065036'>Punctuation</span></h2>
+
+<p class=MsoNormal>The characters that the lexical analyzer (lexer) and the
+parser treat as punctuation are declared in “vocab.h” and defined in
+“vocab.cpp” as the string variable Punctuation.<span style="mso-spacerun:
+yes">  </span>Punctuation is usually ignored, except when explicitly referenced
+in a parse string.<span style="mso-spacerun: yes">  </span>The lexer treats
+punctuation characters in between letters with no intervening white space as
+part of the word.<span style="mso-spacerun: yes">  </span>For example, from the
+input “M.R.”, the lexer will extract “m.r” as the word.<span
+style="mso-spacerun: yes">  </span>This seems to be an acceptable trade off of
+accepting abbreviations and ignoring punctuation. </p>
+
+<h2><a name="_Toc21065037">Word Classes</a></h2>
+
+<p class=MsoNormal>Word classes, or parts-of-speech, are the basic mechanism
+that the parse uses to classify and determine the validity of words.<span
+style="mso-spacerun: yes">  </span>The set of class types and there textual
+names, are define in WordClass and WordClassNames, respectively.<span
+style="mso-spacerun: yes">  </span>These constants are found in “vocab.h”.<span
+style="mso-spacerun: yes">  </span>They must be in the same order.<span
+style="mso-spacerun: yes">  </span>If these are modified, the POS codes and
+corresponding source code should be modified accordingly.</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<h1><a name="_Toc21065038">Ambiguities</a></h1>
+
+<p class=MsoNormal>All ambiguities that arise while the parser validates an
+input are handled through precedence rules.<span style="mso-spacerun: yes"> 
+</span>When applying these rules, the parse will proceed from highest
+precedence to lowest until a valid match is found.<span style="mso-spacerun:
+yes">  </span>Keep in mind that the match being valid is conditional on the
+words following the current one also being successfully parsed.<span
+style="mso-spacerun: yes">  </span>When more than one rule can resolve an
+ambiguity, the rule used is the one with the lowest number, as they are list here.<span
+style="mso-spacerun: yes">  </span>These rules are as follows:</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<ol style='margin-top:0in' start=1 type=1>
+ <li class=MsoNormal style='mso-list:l5 level1 lfo17;tab-stops:list .5in'>When
+     two or more parse strings can validate a given input, precedence is given
+     to the one with the lowest number.<span style="mso-spacerun: yes"> 
+     </span>Parse strings are numbered, starting with zero, in the order they
+     are created.</li>
+ <li class=MsoNormal style='mso-list:l5 level1 lfo17;tab-stops:list .5in'>When
+     a given word is in more than one class, precedence is given to the class
+     that occurs first in WordClass defined in “vocab.h”.</li>
+ <li class=MsoNormal style='mso-list:l5 level1 lfo17;tab-stops:list .5in'>When
+     a given word can match more than one transition (POS code) in the parser’s
+     DFA, the parser determines which has precedence using the CharSet
+     (character set) object trans_set found in “parser.cpp”.<span
+     style="mso-spacerun: yes">  </span>The POS code that occurs first in the
+     string TransOrder is given precedence and is the one used to match the
+     word.</li>
+ <li class=MsoNormal style='mso-list:l5 level1 lfo17;tab-stops:list .5in'>If
+     the parse has a choice between two paths with the same transition (POS
+     code), the parser gives precedence to the one with the lowest function
+     number.<span style="mso-spacerun: yes">  </span>Note that the command code
+     is currently not used in the determination of precedence.<span
+     style="mso-spacerun: yes">  </span>With precedence rules for both POS
+     codes and function numbers, this is not needed.</li>
+ <li class=MsoNormal style='mso-list:l5 level1 lfo17;tab-stops:list .5in'>Identical
+     transitions are taken care of when the parser converts the NFA to a DFA,
+     so these are not an issue.</li>
+</ol>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal>Understanding the precedence rules and properly defining the
+items they are based upon is the key to ensuring that when ambiguities arise,
+the parse will choose the path you expect it to.</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<h1><a name="_Toc21065039">Exceptions</a></h1>
+
+<p class=MsoNormal>All exceptions thrown by the parser classes are base on the
+class std::exception.<span style="mso-spacerun: yes">  </span>Exceptions are
+only thrown for unusual and detrimental reasons.<span style="mso-spacerun:
+yes">  </span>A well-behaved program should never thrown one of these
+exceptions.</p>
+
+<h1><a name="_Toc21065040">Classes</a></h1>
+
+<p class=MsoNormal>This section documents the various classes used to implement
+the parser.<span style="mso-spacerun: yes">  </span>The descriptions are not in
+depth.<span style="mso-spacerun: yes">  </span>The documentation is limited to
+the class description and major public identifiers (types, variables, and functions).<span
+style="mso-spacerun: yes">  </span>More information can be gleaned from the
+header files.<span style="mso-spacerun: yes">  </span>For each class, the
+relevant header file is listed in parentheses.</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<h2><a name="_Toc21065041">Dictionary (diction.hpp)</a></h2>
+
+<p class=MsoNormal>The dictionary class is used to hold information about all
+the words known to the parser.<span style="mso-spacerun: yes">  </span>The
+dictionary maintains such information as the word’s internal code, the word
+classes it belongs to, and its textual (character string) representation.<span
+style="mso-spacerun: yes">  </span>Words can only be added to the dictionary
+during construction.</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<h5>Exceptions Thrown:</h5>
+
+<ul style='margin-top:0in' type=square>
+ <li class=MsoNormal style='mso-list:l9 level1 lfo7;tab-stops:list .5in'>DuplicateWordFound<br>
+     Thrown when a caller attempts to add a word already contained in the
+     dictionary and has a different word code.<span style="mso-spacerun: yes"> 
+     </span>It is acceptable to add a word that already exists with the same
+     word code.<span style="mso-spacerun: yes">  </span>In this case, the new
+     information (i.e., word classes) will be merged into the existing.</li>
+</ul>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><b>Public Types:<o:p></o:p></b></p>
+
+<ul style='margin-top:0in' type=square>
+ <li class=MsoNormal style='mso-list:l9 level1 lfo7;tab-stops:list .5in'>SigCode<br>
+     Enumeration of the set of allowable codes that indicate how the dictionary
+     is to do word comparisons when validating a word (as apposed to adding a
+     word, in which case an “exact match” is used.).<span style="mso-spacerun:
+     yes">  </span>See <b><a href="#_Word_Lookup">Word Lookup</a></b>, under <b><a
+     href="#_Modifiables">Modifiables</a></b>.</li>
+ <li class=MsoNormal style='mso-list:l9 level1 lfo7;tab-stops:list .5in'>ElementType<br>
+     The structure used to store each word and its relevant information in the
+     dictionary.</li>
+ <li class=MsoNormal style='mso-list:l9 level1 lfo7;tab-stops:list .5in'>const_iterator<br>
+     A constant STL iterator pointing to a dictionary item</li>
+ <li class=MsoNormal style='mso-list:l9 level1 lfo7;tab-stops:list .5in'>value_type<br>
+     The type of a dereferenced iterator.<span style="mso-spacerun: yes"> 
+     </span>Under the current implementation, the dictionary’s internal word
+     list is an STL map that maps a word’s textual name to its ElementType
+     structure.<span style="mso-spacerun: yes">  </span>Thus, value_type is of
+     type pair&lt;const std::string, element_type&gt;.</li>
+</ul>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><b>Public Variables:</b></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>None</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><b>Constructor(s):</b></p>
+
+<ul style='margin-top:0in' type=square>
+ <li class=MsoNormal style='mso-list:l9 level1 lfo7;tab-stops:list .5in'>Dictionary(const
+     WordRec vocab[], int sl, SigCode co = siNone)<br>
+     This constructor may throw the DuplicateWordFound exception.</li>
+ <ul style='margin-top:0in' type=circle>
+  <li class=MsoNormal style='mso-list:l9 level2 lfo7;tab-stops:list 1.0in'><i>vocab</i>:
+      A list of information on all the known words.<span style="mso-spacerun:
+      yes">  </span>See <b><a href="#_Word_Lookup">Known Words</a></b>, under <b><a
+      href="#_Modifiables">Modifiables</a></b>.</li>
+  <li class=MsoNormal style='mso-list:l9 level2 lfo7;tab-stops:list 1.0in'><i>sl</i>:
+      The number of significant letters when comparing words.<span
+      style="mso-spacerun: yes">  </span>See <b><a href="#_Word_Lookup">Word
+      Lookup</a></b>, under <b><a href="#_Modifiables">Modifiables</a></b>.</li>
+  <li class=MsoNormal style='mso-list:l9 level2 lfo7;tab-stops:list 1.0in'><i>co</i>:
+      A code used to instruct the dictionary how to compare words when deciding
+      if an inputted word is valid.<span style="mso-spacerun: yes">  </span>See
+      <b><a href="#_Word_Lookup">Word Lookup</a></b>, under <b><a
+      href="#_Modifiables">Modifiables</a></b>. </li>
+ </ul>
+</ul>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><b>Public Methods:</b></p>
+
+<ul style='margin-top:0in' type=square>
+ <li class=MsoNormal style='mso-list:l9 level1 lfo7;tab-stops:list .5in'>const_iterator
+     begin(void) const<br>
+     Returns a constant iterator to the first word in the dictionary’s internal
+     list of words.</li>
+ <li class=MsoNormal style='mso-list:l9 level1 lfo7;tab-stops:list .5in'>const_iterator
+     end(void) const<br>
+     Returns a constant iterator to one element passed the last word in the
+     dictionary’s internal list of words.<span style="mso-spacerun: yes"> 
+     </span>This may seem weird to those not familiar with STL, but this is
+     done to simplify for loops using iterators.<span style="mso-spacerun:
+     yes">  </span>For example:<br>
+     <span style='mso-tab-count:1'>            </span>for (const_iterator i =
+     begin(); i != end(); ++i)<br>
+     <br>
+     A little known fact is that both standard C and C++ allow a similar
+     mechanism with pointers:<br>
+     <span style='mso-tab-count:1'>            </span>int array[100];<br>
+     <span style='mso-tab-count:1'>            </span>...<br>
+     <span style='mso-tab-count:1'>            </span>for (int* p = array; p !=
+     &amp;array[100]; ++p)<br>
+     Notice that array[100] is one past the last element of the array.</li>
+ <li class=MsoNormal style='mso-list:l9 level1 lfo7;tab-stops:list .5in'>const_iterator
+     find(const std::string&amp; word) const<br>
+     Locates a word in the dictionary by its textual representation, and
+     returns an iterator to the word.<span style="mso-spacerun: yes"> 
+     </span>If the word is not found, the function returns end().<span
+     style="mso-spacerun: yes">  </span>Note that this function can take O(1),
+     O(log n), or O(n) time.<span style="mso-spacerun: yes">  </span>The time
+     taken depends on whether the dictionary is instructed to do an “exact
+     match” search (O(log n)), or not (O(n)).<span style="mso-spacerun: yes"> 
+     </span>The dictionary can achieve an average time of O(1) (constant time)
+     when doing an “exact match” search if the STL map container is implemented
+     using a hash table.</li>
+ <li class=MsoNormal style='mso-list:l9 level1 lfo7;tab-stops:list .5in'>const_iterator
+     find(WordCode code) const<br>
+     Locates a word in the dictionary by its word code, and returns an iterator
+     to the word.<span style="mso-spacerun: yes">  </span>If the word is not
+     found, the function returns end().<span style="mso-spacerun: yes"> 
+     </span>Note that this function always takes O(n) time to execute.</li>
+ <li class=MsoNormal style='mso-list:l9 level1 lfo7;tab-stops:list .5in'>bool
+     find(const std::string&amp; word, WordCode&amp; code, WordClasses&amp;
+     classes, WordInfo&amp; info) const<br>
+     This function searches for a word in the dictionary using its textual
+     representation, returning true or false to indicate whether the word is
+     found.<span style="mso-spacerun: yes">  </span>If the word is found, the
+     word’s code, classes, and information are also returned.<span
+     style="mso-spacerun: yes">  </span>For information on the time this
+     function takes to execute, see the description for the method
+     const_iterator find(const std::string&amp; word) const.</li>
+</ul>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<h2><a name="_Toc21065042">Nfa (nfa.hpp)</a></h2>
+
+<p class=MsoNormal>The NFA template class is used to represent a
+Non-deterministic Finite Automaton.</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><b>Namespace:<o:p></o:p></b></p>
+
+<p class=MsoHeader style='tab-stops:.5in'>NFA</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><b>Exceptions Thrown</b>:</p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>None</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><b>Public Types</b>:</p>
+
+<p class=MsoNormal>Note that some of these types, though used with NFA classes,
+are defined outside of the class definition.</p>
+
+<ul style='margin-top:0in' type=square>
+ <li class=MsoNormal style='mso-list:l3 level1 lfo8;tab-stops:list .5in'>Edge<br>
+     The class used to describe an edge</li>
+ <li class=MsoNormal style='mso-list:l3 level1 lfo8;tab-stops:list .5in'>Node<br>
+     The class used to implement a node.<span style="mso-spacerun: yes"> 
+     </span>The class has several methods for inserting edges, including a
+     convenient insertion operator (&lt;&lt;) that behaves in a similar way to
+     the insertion operator used with streams (node1 &lt;&lt; edge1 &lt;&lt;
+     edge2 ... &lt;&lt; edge_n).<span style="mso-spacerun: yes">  </span>The
+     node class contains a public variable “final” of type bool used to initial
+     whether or not the node is a final node.</li>
+</ul>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><b>Public Variables</b>:</p>
+
+<ul style='margin-top:0in' type=square>
+ <li class=MsoNormal style='mso-list:l4 level1 lfo9;tab-stops:list .5in'>nodes<br>
+     The NFA object’s list of nodes.</li>
+ <li class=MsoNormal style='mso-list:l4 level1 lfo9;tab-stops:list .5in'>initial<br>
+     The index of the initial node of the NFA.</li>
+</ul>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><b>Constructor(s)</b>:</p>
+
+<ul style='margin-top:0in' type=square>
+ <li class=MsoNormal style='mso-list:l12 level1 lfo12;tab-stops:list .5in'>NFA(void)</li>
+</ul>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><b>Public Methods</b>:</p>
+
+<ul style='margin-top:0in' type=square>
+ <li class=MsoNormal style='mso-list:l17 level1 lfo10;tab-stops:list .5in'>void
+     clear(void)<br>
+     Removes all existing nodes from the NFA.<o:p></o:p></li>
+ <li class=MsoNormal style='mso-list:l17 level1 lfo10;tab-stops:list .5in'>int
+     addNode()<br>
+     Adds an empty node to the NFA.<o:p></o:p></li>
+ <li class=MsoNormal style='mso-list:l17 level1 lfo10;tab-stops:list .5in'>void
+     addNode(const Node&amp; pNode)<br>
+     Adds a node to the NFA.<span style="mso-spacerun: yes">  </span>The NFA
+     also makes available an insertion operator (&lt;&lt;) that behaves in a
+     similar way to the insertion operator used with streams (NFA1 &lt;&lt;
+     node1 &lt;&lt; node2 &lt;&lt; ... &lt;&lt; node_n).<o:p></o:p></li>
+ <li class=MsoNormal style='mso-list:l17 level1 lfo10;tab-stops:list .5in'>int
+     addEdge(int from, int to, const trans_type&amp; trans)<br>
+     Adds an edge to the NFA.<o:p></o:p></li>
+ <li class=MsoNormal style='mso-list:l17 level1 lfo10;tab-stops:list .5in'>int
+     addNullEdge(int from, int to, EdgeFlag aFlag = NO_EDGE_FLAG)<br>
+     Adds a Null (Llamda) edge to the NFA.<o:p></o:p></li>
+ <li class=MsoNormal style='mso-list:l17 level1 lfo10;tab-stops:list .5in'>int
+     last() const<br>
+     Returns the index of the current last node in the NFA.<o:p></o:p></li>
+</ul>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<h2><a name="_Toc21065043">Dfa (dfa.hpp)</a></h2>
+
+<p class=MsoNormal>The Dfa template class is used to represent a Deterministic
+Finite Automaton.<span style="mso-spacerun: yes">  </span>It is a child class
+of the Nfa template class.</p>
+
+<p class=MsoNormal><span style='font-family:"Courier New"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><b>Exceptions Thrown</b>:</p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>None</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><b>Public Types</b>:</p>
+
+<p class=MsoToc4><span style='mso-bidi-font-size:12.0pt'>None<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><b>Public Variables</b>:</p>
+
+<p class=MsoToc4><span style='mso-bidi-font-size:12.0pt'>None<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><b>Constructor(s)</b>:</p>
+
+<ul style='margin-top:0in' type=square>
+ <li class=MsoNormal style='mso-list:l12 level1 lfo12;tab-stops:list .5in'>DFA(void)</li>
+ <li class=MsoNormal style='mso-list:l12 level1 lfo12;tab-stops:list .5in'>explicit
+     Dfa(const Nfa&amp; nfa)</li>
+</ul>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><b>Public Methods</b>:</p>
+
+<p class=MsoToc4><span style='mso-bidi-font-size:12.0pt'>None<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<h2><a name="_Toc21065044">LexicalAnalyzer (lexical.hpp)</a></h2>
+
+<p class=MsoNormal>It is the job of the Lexical Analyzer (lexer or scanner) to
+group the input into words and punctuation.<span style="mso-spacerun: yes"> 
+</span>See <b><a href="#_Punctuation">Punctuation</a></b>, under <b><a
+href="#_Modifiables">Modifiables</a></b>, for an explanation of what the lexer
+considers to be punctuation.</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><b>Exceptions Thrown</b>:</p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>None</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><b>Public Types</b>:</p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>None</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><b>Public Variables</b>:</p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>None</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><b>Constructor(s)</b>:</p>
+
+<ul style='margin-top:0in' type=square>
+ <li class=MsoNormal style='mso-list:l18 level1 lfo13;tab-stops:list .5in'>LexicalAnalyzer
+     (Dictionary&amp; D)</li>
+ <ul style='margin-top:0in' type=circle>
+  <li class=MsoNormal style='mso-list:l18 level2 lfo13;tab-stops:list 1.0in'><i>D</i>:<span
+      style="mso-spacerun: yes">  </span>The dictionary object that the lexer
+      will use in validating inputted words.</li>
+ </ul>
+</ul>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoToc1 style='margin:0in;margin-bottom:.0001pt'><span
+style='text-transform:none'>Public Methods</span><span style='text-transform:
+none;font-weight:normal'>:<o:p></o:p></span></p>
+
+<ul style='margin-top:0in' type=square>
+ <li class=MsoNormal style='mso-list:l15 level1 lfo11;tab-stops:list .5in'>void
+     Reset(void)<br>
+     Resets the lexer’s position in the current input to the start of the line.<o:p></o:p></li>
+ <li class=MsoNormal style='mso-list:l15 level1 lfo11;tab-stops:list .5in'>string::const_iterator
+     SaveState(void) const<br>
+     Returns a constant string iterator that marks the lexer’s current position
+     so it can be used to restore that position at a later time.<o:p></o:p></li>
+ <li class=MsoNormal style='mso-list:l15 level1 lfo11;tab-stops:list .5in'>void
+     RestoreState(string::const_iterator pstring)<br>
+     Restores the state of the lexer using the iterator returned by SaveState.<o:p></o:p></li>
+ <li class=MsoNormal style='mso-list:l15 level1 lfo11;tab-stops:list .5in'>bool
+     GetNextLine(void)<br>
+     Causes the lexer to retrieve the next line of input.<span
+     style="mso-spacerun: yes">  </span>The function returns true if the
+     retrieved line is empty.<o:p></o:p></li>
+ <li class=MsoNormal style='mso-list:l15 level1 lfo11;tab-stops:list .5in'>bool
+     GetNextWord(string&amp; word, WordCode&amp; code, WordClasses&amp;
+     classes, <span style='mso-tab-count:1'>            </span>const
+     Dictionary::ElementType*&amp; entry)<br>
+     This function return the next word from the current input line.<span
+     style="mso-spacerun: yes">  </span>The function returns true if there are
+     no more words left in the line.<span style="mso-spacerun: yes"> 
+     </span>Note that with this function, each punctuation character is
+     consider a word and has its own word code.<span style="mso-spacerun:
+     yes">  </span>Punctuation characters embedded inside words are considered
+     part of the code.<span style="mso-spacerun: yes">  </span>See <a
+     href="#_Punctuation">Punctuation</a>, under <a href="#_Modifiables">Modifiables</a>.<o:p></o:p></li>
+ <li class=MsoNormal style='mso-list:l15 level1 lfo11;tab-stops:list .5in'>bool
+     LineIsEmpty(void) const<br>
+     Returns true if the current line of input is empty.<o:p></o:p></li>
+ <li class=MsoNormal style='mso-list:l15 level1 lfo11;tab-stops:list .5in'>std::string
+     CopyLine(bool skipws = true)<br>
+     Copies the current line from the current position to the end.<o:p></o:p></li>
+</ul>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<h2><a name="_Toc21065045">Sentences (sentence.cpp)</a></h2>
+
+<p class=MsoNormal>The Sentences class is used by the parser in building
+structured sentences from the words returned by the lexer.<span
+style="mso-spacerun: yes">  </span>When using Sentences and related classes, it
+is important to keep certain things in mind:</p>
+
+<ol style='margin-top:0in' start=1 type=1>
+ <li class=MsoNormal style='mso-list:l6 level1 lfo14;tab-stops:list .5in'><i>All
+     </i>lists of words contained within the Sentences class object will be in <i>reverse</i>
+     order.<span style="mso-spacerun: yes">  </span>Thus, the first subject in
+     a list of subjects will be last one retrieved from input.<span
+     style="mso-spacerun: yes">  </span>This is because the parser validates
+     and adds words recursive backwards, and because it is more efficient to
+     add new words to the end of the vectors used to store them.<span
+     style="mso-spacerun: yes">  </span>This is the trade-off required for
+     storing the words in vectors, which are more memory efficient (with better
+     locality of reference) than lists or deques.<span style="mso-spacerun:
+     yes">  </span>To process the words in the order they were inputted, just
+     use reverse iterators.</li>
+ <li class=MsoNormal style='mso-list:l6 level1 lfo14;tab-stops:list .5in'>An
+     input containing (seemingly) more than one sentence, but using the same
+     set of subjects, will be stored as one sentence with multiple
+     predicates.<span style="mso-spacerun: yes">  </span>This is how compound
+     sentences are handled.<span style="mso-spacerun: yes">  </span>Multiple
+     sentences, each with their own (even equivilent) set of subjects, will be
+     stored as individual sentences.<span style="mso-spacerun: yes"> 
+     </span>Remember that, for the reasons given above, they will be in reverse
+     order of input.</li>
+ <li class=MsoNormal style='mso-list:l6 level1 lfo14;tab-stops:list .5in'>Conjunctions
+     are unique in that they are stored at the same level as what they
+     separate.<span style="mso-spacerun: yes">  </span>For example, an input of
+     two sentences separated with the word “and”, will be stored as three
+     sentences: the first; the word “and” as a sentences by itself; then the
+     second.<span style="mso-spacerun: yes">  </span>Similarly, the phase “the
+     red and black house”, would store three adjectives under the word “house”:
+     “red”, “and”, and “black”.</li>
+</ol>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><b>Exceptions Thrown</b>:</p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>None</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><b>Public Types</b>:</p>
+
+<p class=MsoNormal>Note that several of these types, though used with Sentences
+classes, are defined outside of the class definition.</p>
+
+<ul style='margin-top:0in' type=square>
+ <li class=MsoNormal style='mso-list:l14 level1 lfo15;tab-stops:list .5in'>Word<br>
+     The class used to store information on a word parsed from input.<span
+     style="mso-spacerun: yes">  </span>All the word lists used with the
+     Sentences class use this class as their element type.</li>
+ <li class=MsoNormal style='mso-list:l14 level1 lfo15;tab-stops:list .5in'>Words<br>
+     The basic word list type.</li>
+ <li class=MsoNormal style='mso-list:l14 level1 lfo15;tab-stops:list .5in'>Adverb<br>
+     The word class used to store an adverb.</li>
+ <li class=MsoNormal style='mso-list:l14 level1 lfo15;tab-stops:list .5in'>Adverbs<br>
+     The list type used to store a set of adverbs.</li>
+ <li class=MsoNormal style='mso-list:l14 level1 lfo15;tab-stops:list .5in'>Adjective<br>
+     The class used to store an adjective and its associated adverbs.</li>
+ <li class=MsoNormal style='mso-list:l14 level1 lfo15;tab-stops:list .5in'>Adjectives<br>
+     The list type used to store a set of adjectives.</li>
+ <li class=MsoNormal style='mso-list:l14 level1 lfo15;tab-stops:list .5in'>Phrase<br>
+     The class used to store noun phrases, which include a noun, its
+     preposition, article, and adjectives.</li>
+ <li class=MsoNormal style='mso-list:l14 level1 lfo15;tab-stops:list .5in'>Phrases<br>
+     The list type used to store a set of noun phrases.</li>
+ <li class=MsoNormal style='mso-list:l14 level1 lfo15;tab-stops:list .5in'>Subject<br>
+     The class used to store a subject, its article, and set of adjectives.</li>
+ <li class=MsoNormal style='mso-list:l14 level1 lfo15;tab-stops:list .5in'>Subjects<br>
+     The list type used to store a set of subjects.</li>
+ <li class=MsoNormal style='mso-list:l14 level1 lfo15;tab-stops:list .5in'>Predicate<br>
+     The class used to store predicates, which include a verb, its adverbs, and
+     noun phrases.</li>
+ <li class=MsoNormal style='mso-list:l14 level1 lfo15;tab-stops:list .5in'>Predicates<br>
+     The list type used to store a set of predicates.</li>
+ <li class=MsoNormal style='mso-list:l14 level1 lfo15;tab-stops:list .5in'>Sentence<br>
+     The class used to store a sentence, which includes its subjects and
+     predicates.</li>
+</ul>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><b>Public Variables</b>:</p>
+
+<ul style='margin-top:0in' type=square>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo16;tab-stops:list .5in'>parse_string_num<br>
+     This variable will, after a successful parse, hold an integer equal to the
+     parse string number (zero-based) that was used to build the sentences.</li>
+</ul>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><b>Constructor(s)</b>:</p>
+
+<ul style='margin-top:0in' type=square>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo16;tab-stops:list .5in'>Sentences(void)</li>
+</ul>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><b>Public Methods</b>:</p>
+
+<ul style='margin-top:0in' type=square>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo16;tab-stops:list .5in'>void
+     clear(void)<br>
+     Removes all the sentences from the list.<o:p></o:p></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo16;tab-stops:list .5in'>void
+     AddWord(const Word&amp; W, int code)<br>
+     Adds a word to the list of sentences.<o:p></o:p></li>
+ <ul style='margin-top:0in' type=circle>
+  <li class=MsoNormal style='mso-list:l0 level2 lfo16;tab-stops:list 1.0in'><i>W</i>:
+      the word to be added.<o:p></o:p></li>
+  <li class=MsoNormal style='mso-list:l0 level2 lfo16;tab-stops:list 1.0in'><i>code</i>:
+      the function number retrieved from the parse string.<span
+      style="mso-spacerun: yes">  </span>This code is use to tell the class how
+      to add the word.</li>
+ </ul>
+</ul>
+
+<h2><a name="_Toc21065046">Parser (parser.cpp)</a></h2>
+
+<p class=MsoNormal>This class is the actual parser that validates inputted
+sentences and build a structured list of these sentences.</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><b>Exceptions Thrown</b>:</p>
+
+<ul style='margin-top:0in' type=square>
+ <li class=MsoNormal style='mso-list:l10 level1 lfo18;tab-stops:list .5in'>BadParseString<br>
+     This exception is thrown when the parser encounters an error in a parse
+     string while build the NFA from it.</li>
+</ul>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><b>Public Types</b>:</p>
+
+<ul style='margin-top:0in' type=square>
+ <li class=MsoNormal style='mso-list:l10 level1 lfo18;tab-stops:list .5in'>ParseResult<br>
+     An enumeration of all possible resulted returned by the parse after
+     parsing an input.</li>
+ <ul style='margin-top:0in' type=circle>
+  <li class=MsoNormal style='mso-list:l10 level2 lfo18;tab-stops:list 1.0in'>parseOk<br>
+      Returned after a successful parse.</li>
+  <li class=MsoNormal style='mso-list:l10 level2 lfo18;tab-stops:list 1.0in'>parseBadGrammer<br>
+      The parser returns this value after an unsuccessful parse.</li>
+  <li class=MsoNormal style='mso-list:l10 level2 lfo18;tab-stops:list 1.0in'>parseUnresolvedPronoun<br>
+      This value is returned if the parse was successful, but the parse could
+      not determine what a pronoun was referring to.</li>
+ </ul>
+</ul>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><b>Public Variables</b>:</p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>None</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><b>Constructor(s)</b>:</p>
+
+<ul style='margin-top:0in' type=square>
+ <li class=MsoNormal style='mso-list:l13 level1 lfo19;tab-stops:list .5in'>Parser(LexicalAnalyzer&amp;
+     pL, Dictionary&amp; pD, const char* const parse_strings[])<br>
+     This constructor may throw a BadParseString exception.</li>
+ <ul style='margin-top:0in' type=circle>
+  <li class=MsoNormal style='mso-list:l13 level2 lfo19;tab-stops:list 1.0in'><i>pL</i>:
+      The lexer the parse will use to retrieve words from input.</li>
+  <li class=MsoNormal style='mso-list:l13 level2 lfo19;tab-stops:list 1.0in'><i>pD</i>:
+      The dictionary the parse will use to retrieve information on words (such
+      as for ‘m’ transitions).<span style="mso-spacerun: yes">  </span>This
+      dictionary should be the same object used to construct the lexer.</li>
+  <li class=MsoNormal style='mso-list:l13 level2 lfo19;tab-stops:list 1.0in'><i>parse_strings</i>:
+      the set of strings that the parse will use in build the DFAs.</li>
+ </ul>
+</ul>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><b>Public Methods</b>:</p>
+
+<ul style='margin-top:0in' type=square>
+ <li class=MsoNormal style='mso-list:l13 level1 lfo19;tab-stops:list .5in'>bool
+     parse(Sentences&amp; S)<br>
+     Parses the next line of input and places it in S.<span
+     style="mso-spacerun: yes">  </span>The function returns true if the parse
+     was successful.<o:p></o:p></li>
+ <li class=MsoNormal style='mso-list:l13 level1 lfo19;tab-stops:list .5in'>ParseResult
+     GetParseResult(void) const<br>
+     Returns the result code from the last parse attempt.<o:p></o:p></li>
+ <li class=MsoNormal style='mso-list:l13 level1 lfo19;tab-stops:list .5in'>const
+     Word&amp; GetUnresolvedPronoun(void) const<br>
+     If there was an unresolved pronoun in that last parse attempt, this
+     function is used to determine what it was.<o:p></o:p></li>
+ <li class=MsoNormal style='mso-list:l13 level1 lfo19;tab-stops:list .5in'>WordCode
+     GetFailedWordCode(void) const<br>
+     If the last parse failed, this function will return the code of the word
+     that caused the failure.<o:p></o:p></li>
+ <li class=MsoNormal style='mso-list:l13 level1 lfo19;tab-stops:list .5in'>const
+     string&amp; GetFailedWord(void) const<br>
+     If the last parse failed, this function will return the textual
+     representation of the word that caused the failure.<o:p></o:p></li>
+ <li class=MsoNormal style='mso-list:l13 level1 lfo19;tab-stops:list .5in'>void
+     SetObjectPronoun(const Word&amp; w)<br>
+     void SetMalePronoun(const Word&amp; w)<br>
+     void SetFemalePronoun(const Word&amp; w)<br>
+     These functions set the current word use for pronoun resolution of the
+     type indicated in the function name.</li>
+</ul>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+</div>
+
+</body>
+
+</html>

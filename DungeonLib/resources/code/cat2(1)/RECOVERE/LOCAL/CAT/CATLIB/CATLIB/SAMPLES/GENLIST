@@ -1,0 +1,7 @@
+-e
+-a
+example.d
+samples.d
+\cat\std\zzrqd.d
+\cat\std\zzstd.d
+

@@ -1,0 +1,38 @@
+room.o:	room.c defines.h globals.h funcs.h
+	cc -DST -c room.c
+
+string.o: string.c defines.h globals.h funcs.h
+	cc -DST -c string.c
+
+object.o: object.c defines.h globals.h funcs.h
+	cc -DST -c object.c
+
+verb.o:	verb.c defines.h globals.h funcs.h
+	cc -DST -c verb.c
+	
+msg.o: msg.c defines.h globals.h funcs.h
+	cc -DST -c msg.c
+	
+token.o: token.c defines.h globals.h funcs.h
+	cc -DST -c token.c
+	
+logic.o: logic.c defines.h globals.h funcs.h
+	cc -DST -c logic.c
+	
+main.o:	main.c defines.h globals.h funcs.h
+	cc -DST -c main.c
+	
+files.o: files.c defines.h globals.h funcs.h
+	cc -DST -c files.c
+	
+lcheck.o: lcheck.c defines.h
+	cc -DST -c lcheck.c
+	
+gen.ttp: files.o room.o object.o verb.o msg.o token.o logic.o main.o lcheck.o \
+         string.o
+	cc files.o room.o object.o verb.o msg.o token.o logic.o main.o \
+	   lcheck.o string.o -o gen.ttp
+	mv gen.ttp \cat 
+
+all: gen.ttp
+	touch all

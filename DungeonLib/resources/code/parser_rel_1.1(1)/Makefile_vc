@@ -1,0 +1,62 @@
+SRCS=diction.cpp lexical.cpp parser.cpp parser_test.cpp parsestr.cpp pnfa.cpp regex.cpp \
+     regex_test.cpp sentence.cpp test.cpp vocab.cpp
+
+OBJS=$(SRCS:.cpp=.obj)
+
+
+AR		=
+AS		=
+CC		=cl
+CXX             =cl
+LD		=
+NM		=
+RANLIB		=
+
+RM		=DEL
+
+CFLAGS		=$(CC_COMPILER) $(CC_INCLUDE) $(CC_DEFINES) $(ADDED_CFLAGS)
+
+CPPFLAGS	=$(CPP_COMPILER) $(CC_INCLUDE) $(CC_DEFINES) $(ADDED_CPPFLAGS)
+
+CC_COMPILER	=
+
+CPP_COMPILER	=
+
+CC_INCLUDE	= $(EXTRA_INCLUDE)
+CC_DEFINES	= $(EXTRA_DEFINE)
+
+.SUFFIXES:  .c .cpp .obj
+
+.c.o:
+	$(CC) $(CFLAGS) -o $*.obj -c $<
+.cpp.o:
+	$(CXX) $(CPPFLAGS) -o $*.obj -c $<
+
+DEBUG_FLAG=
+TEMP_FLAG=
+WARN_FLAGS=-W3
+OPT_FLAGS=-O2 -Ot -Og
+EXTRA_INCLUDE=
+EXTRA_DEFINE=$(DEBUG_FLAG) $(TEMP_FLAG) $(WARN_FLAGS) $(OPT_FLAGS)
+ADDED_CFLAGS=
+ADDED_CPPFLAGS=-GX -FD
+BUILD=test.exe
+
+default: $(BUILD)
+
+$(BUILD): $(OBJS)
+	$(CXX) $(CPPFLAGS) -o $(BUILD) $(OBJS)
+
+all: clean $(BUILD)
+
+clean: 
+	$(RM) *.o
+	$(RM) *.obj 
+	$(RM) *.ii 
+	$(RM) *.s 
+	$(RM) *.idb
+	$(RM) $(BUILD)
+
+#!include depend
+
+
